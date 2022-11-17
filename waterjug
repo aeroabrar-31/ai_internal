@@ -2,7 +2,9 @@
 from collections import defaultdict
 
 
-jug1, jug2, aim = 1, 1, 2
+jug1=int(input("Enter jug 1 : "))
+jug2=int(input("Enter jug 2 : "))
+aim =  int(input("Enter aim : "))
 
 visited = defaultdict(lambda: False)
 
