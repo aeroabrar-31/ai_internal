@@ -1,0 +1,44 @@
+#Graph coloring
+
+colors = ['Red', 'Blue', 'Green', 'Yellow', 'Black']
+
+states = ['Western Australia', 'South Australia', 'Northern Territory', 'Queensland','New South Wales', 'Victoria','Tasmania']
+
+neighbors = {}
+neighbors['Western Australia'] = ['Northern Territory', 'South Australia']
+neighbors['South Australia'] = ['Western Australia', 'Northern Territory', 'Queensland', 'New South Wales', 'Victoria']
+neighbors['Northern Territory'] = ['Southern Australia', 'Western Australia', 'Queensland']
+neighbors['Queensland'] = ['Northern Territory', 'South Australia', 'New South Wales']
+neighbors['New South Wales'] =['South Australia','Queensland','Victoria']
+neighbors['Victoria'] =['New South Wales','South Australia']
+neighbors['Tasmania'] =[]
+colors_of_states = {}
+
+def promising(state, color):
+     for neighbor in neighbors.get(state): 
+        color_of_neighbor = colors_of_states.get(neighbor)
+        if color_of_neighbor == color:
+            return False
+
+     return True
+
+def get_color_for_state(state):
+    for color in colors:
+        if promising(state, color):
+            return color
+
+def main():
+    for state in states:
+        colors_of_states[state] = get_color_for_state(state)
+
+    st=set()
+
+    for i in colors_of_states:
+      st.add(colors_of_states[i])
+      print(i, " - ",colors_of_states[i])
+
+    
+    print("No of colors Used is : ",len(st))
+      
+
+main()
