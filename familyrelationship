@@ -1,0 +1,45 @@
+from collections import defaultdict
+
+class Family_relationship:
+
+  def __init__(self,parent):
+    self.family=defaultdict(list)
+    self.head=parent
+    self.dead=set()
+  
+
+  def birth(self,parent,child):
+    self.family[parent].append(child)
+
+  def death(self,name):
+    self.dead.add(name)
+
+  def inheritance(self):
+    self.ans=[]
+    self.depth_search(self.head)
+    return self.ans
+
+  def depth_search(self,curr):
+    if curr not in self.dead:
+      self.ans.append(curr)
+    
+    for child in self.family[curr]:
+      self.depth_search(child)
+
+
+obj=Family_relationship('John')
+
+obj.birth('John','Mark')
+obj.birth('John','David')
+
+obj.birth('David','Tim')
+obj.birth('David','Stokes')
+obj.birth('David','Ben')
+
+print(obj.inheritance())
+obj.death('John')
+print(obj.inheritance())
+
+obj.death('Ben')
+print(obj.inheritance())
+
